@@ -39,8 +39,11 @@
             for (let button of this.mybutton) {
                 button.disabled = false;
             }
-            this.playAgainBtn.remove();
-            this.declaration.remove();
+            try{
+                this.playAgainBtn.remove();
+                this.declaration.remove();
+            }catch{console.log('no play again btn')};
+            
         },
         endGameDOMCreate: function(result) {
             const playAgaindiv = document.querySelector('.playAgain');
@@ -57,14 +60,16 @@
             }          
         },
         renderMove: function (button){
-            if (button === undefined){
-                for (let button of this.mybutton) button.textContent = '';
+            if (button === undefined){ // restart called block
+                for (let button of this.mybutton){
+                    button.textContent = '';
+                    button.style.backgroundImage = 'none';
+                } 
             }else {
                 if (this.player1_turn) {
                     (this.player1.move.length === 1) ? (button.textContent = this.player1.move) : (button.style.backgroundImage = this.player1.move);                  
                 }else{
-                    (this.player2.move.length === 1) ? (button.textContent = this.player2.move) : (button.style.backgroundImage = this.player2.move);
-                    
+                    (this.player2.move.length === 1) ? (button.textContent = this.player2.move) : (button.style.backgroundImage = this.player2.move); 
                 }
             }
         },
@@ -119,18 +124,36 @@
                 && this.gameBoard[2] == this.gameBoard[4]
                 && this.gameBoard[4] == this.gameBoard[6]) return true;
         },  
-        customizePlayer: function(){
+        customizePlayer: function(){ //this could be better!
             const customizeBtn = document.querySelector('.customize');
             customizeBtn.addEventListener('click', () => {
-                let p1move = "url(images/aya.webp)";
-                let p2move = "url(images/yukina.webp)";
-                this.player1 = Player('aya', p1move);
-                this.player2 = Player('yukina', p2move);
-                this.restart();
+                dialog = document.querySelector('dialog');
+                dialog.showModal();
+                const closeBtn = document.querySelector('#dlgCloseBtn');
+                closeBtn.addEventListener('click', () => dialog.close());
+                const confirmBtn = document.querySelector('#confirmBtn');
+                confirmBtn.addEventListener('click', () => {
+                    const name1 = document.querySelector('#name1');
+                    const name2 = document.querySelector('#name2');
+                    try {
+                        const selected = document.querySelector ('input[name="choice"]:checked');
+                        this.player1 = Player(name1.value,`url(images/${selected.value}.webp`);
+                    }catch (error) {
+                        console.log('error');
+                        this.player1 = Player(name1.value,'O');                       
+                    }
+                    try {
+                        const selected2 = document.querySelector('input[name="choice2"]:checked');
+                        this.player2 = Player(name2.value, `url(images/${selected2.value}.webp)`);
+                    } catch (error) {
+                        this.player2 = Player(name2.value, 'X');
+                    }
+                    dialog.close();
+                    this.restart();
+                })
             });
         }
-    }
-
+    }    
     gameBoard.init();
 
 })();
