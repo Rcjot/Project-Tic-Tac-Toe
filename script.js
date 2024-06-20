@@ -27,6 +27,7 @@
             }
             const restartBtn = document.querySelector('.restart');
             restartBtn.addEventListener('click', () => this.restart());
+            this.customizePlayer();
         },
         restart: function(){
             this.player1_turn = true;
@@ -119,7 +120,21 @@
                 && this.gameBoard[2] == this.gameBoard[4]
                 && this.gameBoard[4] == this.gameBoard[6]) return true;
         },  
+        customizePlayer: function(){
+            const customizeBtn = document.querySelector('.customize');
+            customizeBtn.addEventListener('click', () => {
+                const p1name = prompt("player1 name");
+                const p1move = prompt("player1 move");
+                const p2name = prompt("player2 name");
+                const p2move = prompt("player2 move");
+
+                this.player1 = Player(p1name, p1move);
+                this.player2 = Player(p2name, p2move);
+                this.restart();
+            });
+        }
     }
+
     gameBoard.init();
 
 })();
