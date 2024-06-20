@@ -60,16 +60,24 @@
             }          
         },
         renderMove: function (button){
+            
             if (button === undefined){ // restart called block
                 for (let button of this.mybutton){
-                    button.textContent = '';
-                    button.style.backgroundImage = 'none';
+                    const insideButton = button.querySelector('div');
+                    insideButton.textContent = '';
+                    insideButton.style.backgroundImage = 'none';
+                    insideButton.style.backgroundColor = 'transparent';
+
                 } 
             }else {
+                const insideButton = button.querySelector('div');
+                
                 if (this.player1_turn) {
-                    (this.player1.move.length === 1) ? (button.textContent = this.player1.move) : (button.style.backgroundImage = this.player1.move);                  
+                    (this.player1.move.length === 1) ? (insideButton.textContent = this.player1.move) : (insideButton.style.backgroundImage = this.player1.move);                  
+                    insideButton.style.backgroundColor = 'rgba(82, 127, 187, 0.4)';
                 }else{
-                    (this.player2.move.length === 1) ? (button.textContent = this.player2.move) : (button.style.backgroundImage = this.player2.move); 
+                    (this.player2.move.length === 1) ? (insideButton.textContent = this.player2.move) : (insideButton.style.backgroundImage = this.player2.move); 
+                    insideButton.style.backgroundColor = 'rgba(154, 205, 50, 0.4)';
                 }
             }
         },
