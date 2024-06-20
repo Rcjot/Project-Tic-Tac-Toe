@@ -2,27 +2,31 @@
     Player = function (name,move) {
         return {name,move};
     };
-
     const gameBoard = {
         player1_turn: true,
         player1: Player('player1', 'O'),
         player2: Player('player2', 'X'),
         gameEnd: false,
         mybutton: document.querySelectorAll('.square'),
+        declaration: null,
+        playAgainBtn: null,
         gameBoard: [0, 0, 0,
                     0, 0, 0,
                     0, 0, 0],
-        printGame: function() {
-            let index=0;
-            let indexee = index+3;
-            for (let row = 1; row<=3; row++){
-                let rowString = '';                
-                for(index; index<indexee; index++){
-                    rowString += this.gameBoard[index];
-                }
-                indexee += 3;
-                console.log(rowString);
+
+        init: function(){
+            this.buttonEvent();
+        },
+        buttonEvent: function(){
+            for (let button of this.mybutton) {
+                button.addEventListener('click', () => {
+                    this.renderMove(button);
+                    this.appendMove(button.id);
+                    button.disabled = true;
+                })
             }
+            const restartBtn = document.querySelector('.restart');
+            restartBtn.addEventListener('click', () => this.restart());
         },
         restart: function(){
             this.player1_turn = true;
@@ -34,48 +38,33 @@
             for (let button of this.mybutton) {
                 button.disabled = false;
             }
-        },
-        init: function(){
-            this.buttonEvent();
-        },
-        buttonEvent: function(){
-            for (let button of this.mybutton) {
-                button.addEventListener('click', () => {
-                    // console.log(button.textContent);
-                    this.renderMove(button);
-                    this.appendMove(button.textContent);
-                    button.disabled = true;
-                })
-            }
-            const restartBtn = document.querySelector('.restart');
-            restartBtn.addEventListener('click', () => this.restart());
+            this.playAgainBtn.remove();
+            this.declaration.remove();
         },
         endGameDOMCreate: function(result) {
             const playAgaindiv = document.querySelector('.playAgain');
-            const declaration = document.createElement('div');
-            const playAgainBtn = document.createElement('button');
-            playAgaindiv.appendChild(declaration);
-            playAgaindiv.appendChild(playAgainBtn);
-            playAgainBtn.textContent = 'Play again';
+            this.declaration = document.createElement('div');
+            this.playAgainBtn = document.createElement('button');
+            playAgaindiv.appendChild(this.declaration);
+            playAgaindiv.appendChild(this.playAgainBtn);
+            this.playAgainBtn.textContent = 'Play again';
+            this.playAgainBtn.addEventListener('click', () => this.restart());
             if (result === 'won') {
-                declaration.textContent =(this.player1_turn) ? this.player2.name + ' won!': this.player1.name + ' won!';
+                this.declaration.textContent =(this.player1_turn) ? this.player2.name + ' won!': this.player1.name + ' won!';
             }else if (result === 'draw'){
-                declaration.textContent = "it's a draw!";
-            }
-            playAgainBtn.addEventListener('click', () => {
-                this.restart();
-                playAgainBtn.remove();
-                declaration.remove();
-            });
+                this.declaration.textContent = "it's a draw!";
+            }          
         },
         renderMove: function (button){
             if (button === undefined){
-                for (let button of this.mybutton) button.setAttribute('style', 'background-color: white');
+                for (let button of this.mybutton) button.textContent = '';
             }else {
                 if (this.player1_turn) {
-                    button.setAttribute('style', 'background-color: blue');
+                    // button.setAttribute('style', 'background-color: blue');
+                    button.textContent = this.player1.move;
                 }else{
-                    button.setAttribute('style', 'background-color: black');
+                    // button.setAttribute('style', 'background-color: black');
+                    button.textContent = this.player2.move;
                 }
             }
         },
@@ -87,7 +76,6 @@
                 this.gameBoard[move] = this.player2.move;
                 this.player1_turn = true;
             }
-            this.printGame();
             this.gameFlow();
         },
         gameFlow: function(){
@@ -109,7 +97,7 @@
                 return 'draw';
             }
         },
-        checkRows: function(){
+        checkRows: function(){ // what the heck is some every function, these checks can be shortened??
             for (let rowIndex = 0; rowIndex<9; rowIndex+=3){
                 if (this.gameBoard[rowIndex] != 0 
                     && this.gameBoard[rowIndex] === this.gameBoard[rowIndex+1] 

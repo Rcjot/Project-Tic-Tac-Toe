@@ -30,7 +30,9 @@ button {
     height: 100px;
     background-color: transparent;
     border: 1px solid black;
-    color: transparent;
+    /* color: transparent; */
+    font-size: 40px;
+    color: black;
     
 }
 
