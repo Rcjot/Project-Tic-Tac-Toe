@@ -1,4 +1,4 @@
-//(function(){
+(function(){
     Player = function (name,move) {
         return {name,move};
     };
@@ -7,6 +7,8 @@
         player1_turn: true,
         player1: Player('player1', 'O'),
         player2: Player('player2', 'X'),
+        gameEnd: false,
+        mybutton: document.querySelectorAll('.square'),
         gameBoard: [0, 0, 0,
                     0, 0, 0,
                     0, 0, 0],
@@ -22,21 +24,45 @@
                 console.log(rowString);
             }
         },
+        restart: function(){
+            this.player1_turn = true;
+            this.gameBoard = [0, 0, 0,
+                              0, 0, 0,
+                              0, 0, 0];
+            this.gameEnd = false;
+            this.renderMove();
+            for (let button of this.mybutton) {
+                button.disabled = false;
+            }
+        },
         init: function(){
             this.buttonEvent();
-            this.promptMove();
         },
         buttonEvent: function(){
-            const mybutton = document.querySelectorAll('button');
-            for (let button of mybutton) {
+            for (let button of this.mybutton) {
                 button.addEventListener('click', () => {
-                    console.log(button.textContent);
-                    this.promptMove(button.textContent);
+                    // console.log(button.textContent);
+                    this.renderMove(button);
+                    this.appendMove(button.textContent);
                     button.disabled = true;
                 })
             }
+            const restartBtn = document.querySelector('.restart');
+            restartBtn.addEventListener('click', () => this.restart());
         },
-        promptMove: function(move){
+        renderMove: function (button){
+            if (button === undefined){
+                for (let button of this.mybutton) button.setAttribute('style', 'background-color: white');
+            }else {
+                if (this.player1_turn) {
+                    button.setAttribute('style', 'background-color: blue');
+                }else{
+                    button.setAttribute('style', 'background-color: black');
+                }
+            }
+
+        },
+        appendMove: function(move){
             if (this.player1_turn) {
                 this.gameBoard[move] = this.player1.move;
                 this.player1_turn = false;
@@ -45,7 +71,12 @@
                 this.player1_turn = true;
             }
             this.printGame();
-            if (move <0 || move>8 || this.checkGameEnd()) return 1;
+            this.gameEnd = this.checkGameEnd();
+            if (this.gameEnd) {
+                for (let button of this.mybutton) {
+                    button.disabled = true;
+                }
+            }
         },
         checkGameEnd: function(){
             if (this.checkRows() || this.checkColumns() || this.checkDiagonals()){
@@ -81,9 +112,10 @@
             if(this.gameBoard[2] != 0 
                 && this.gameBoard[2] == this.gameBoard[4]
                 && this.gameBoard[4] == this.gameBoard[6]) return true;
-        }  
+        },  
     }
     gameBoard.init();
-//})();
+
+})();
 
 
