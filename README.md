@@ -1,5 +1,8 @@
 # Project-Tic-Tac-Toe
 
+pins came from here! : https://bandori.fandom.com/wiki/BanG_Dream!_Girls_Band_Party!/Profile_Pins
+
+
 hi! this is project tictactoe,
 
 
