@@ -71,11 +71,22 @@
                 this.player1_turn = true;
             }
             this.printGame();
+            this.gameFlow();
+        },
+        gameFlow: function(){
             this.gameEnd = this.checkGameEnd();
             if (this.gameEnd) {
                 for (let button of this.mybutton) {
                     button.disabled = true;
                 }
+                const playAgaindiv = document.querySelector('.playAgain');
+                const playAgainBtn = document.createElement('button');
+                playAgaindiv.appendChild(playAgainBtn);
+                playAgainBtn.textContent = 'Play again';
+                playAgainBtn.addEventListener('click', () => {
+                    this.restart();
+                    playAgainBtn.remove();
+                });
             }
         },
         checkGameEnd: function(){
