@@ -1,4 +1,4 @@
-(function(){
+//(function(){
     Player = function (name,move) {
         return {name,move};
     };
@@ -23,7 +23,6 @@
             }
         },
         promptMove: function(){
-            
             let move = prompt('your move');
             if (this.player1_turn) {
                 this.gameBoard[move] = this.player1.move;
@@ -33,15 +32,49 @@
                 this.player1_turn = true;
             }
             this.printGame();
+            if (move <0 || move>8 || this.checkGameEnd()) return 1;
             if (this.gameBoard.includes(0)) this.promptMove();
         },
-        checkGame: function(){
-            
+        checkGameEnd: function(){
+            if (this.checkRows() || this.checkColumns() || this.checkDiagonals()){
+                if(this.player1_turn) {
+                    console.log(this.player2.name + ' won!');
+                }else{
+                    console.log(this.player1.name + ' won!');
+                }
+                return true;
+            } else if (!this.gameBoard.includes(0)){
+                console.log('Draw!!');
+                return true;
+            }
+        },
+        checkRows: function(){
+            for (let rowIndex = 0; rowIndex<9; rowIndex+=3){
+                if (this.gameBoard[rowIndex] != 0 
+                    && this.gameBoard[rowIndex] === this.gameBoard[rowIndex+1] 
+                    && this.gameBoard[rowIndex+1] === this.gameBoard[rowIndex+2]) return true;
+            }
+        },
+        checkColumns: function(){
+            for (let columnIndex = 0; columnIndex<3; columnIndex++){
+                if (this.gameBoard[columnIndex] != 0 
+                    && this.gameBoard[columnIndex] == this.gameBoard[columnIndex+3]
+                    && this.gameBoard[columnIndex+3] == this.gameBoard[columnIndex+6]) return true;
+            }
+        },
+        checkDiagonals: function(){
+            if(this.gameBoard[0] != 0 
+                && this.gameBoard[0] === this.gameBoard[4] 
+                && this.gameBoard[4] == this.gameBoard[8]) return true;
+            if(this.gameBoard[2] != 0 
+                && this.gameBoard[2] == this.gameBoard[4]
+                && this.gameBoard[4] == this.gameBoard[6]) return true;
         }
+    
 
     }
     gameBoard.printGame();
     gameBoard.promptMove();
-})();
+//})();
 
 
