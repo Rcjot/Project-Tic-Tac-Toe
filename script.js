@@ -61,11 +61,10 @@
                 for (let button of this.mybutton) button.textContent = '';
             }else {
                 if (this.player1_turn) {
-                    // button.setAttribute('style', 'background-color: blue');
-                    button.textContent = this.player1.move;
+                    (this.player1.move.length === 1) ? (button.textContent = this.player1.move) : (button.style.backgroundImage = this.player1.move);                  
                 }else{
-                    // button.setAttribute('style', 'background-color: black');
-                    button.textContent = this.player2.move;
+                    (this.player2.move.length === 1) ? (button.textContent = this.player2.move) : (button.style.backgroundImage = this.player2.move);
+                    
                 }
             }
         },
@@ -123,13 +122,10 @@
         customizePlayer: function(){
             const customizeBtn = document.querySelector('.customize');
             customizeBtn.addEventListener('click', () => {
-                const p1name = prompt("player1 name");
-                const p1move = prompt("player1 move");
-                const p2name = prompt("player2 name");
-                const p2move = prompt("player2 move");
-
-                this.player1 = Player(p1name, p1move);
-                this.player2 = Player(p2name, p2move);
+                let p1move = "url(images/aya.webp)";
+                let p2move = "url(images/yukina.webp)";
+                this.player1 = Player('aya', p1move);
+                this.player2 = Player('yukina', p2move);
                 this.restart();
             });
         }
