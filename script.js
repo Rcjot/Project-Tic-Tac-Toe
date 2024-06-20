@@ -50,6 +50,24 @@
             const restartBtn = document.querySelector('.restart');
             restartBtn.addEventListener('click', () => this.restart());
         },
+        endGameDOMCreate: function(result) {
+            const playAgaindiv = document.querySelector('.playAgain');
+            const declaration = document.createElement('div');
+            const playAgainBtn = document.createElement('button');
+            playAgaindiv.appendChild(declaration);
+            playAgaindiv.appendChild(playAgainBtn);
+            playAgainBtn.textContent = 'Play again';
+            if (result === 'won') {
+                declaration.textContent =(this.player1_turn) ? this.player2.name + ' won!': this.player1.name + ' won!';
+            }else if (result === 'draw'){
+                declaration.textContent = "it's a draw!";
+            }
+            playAgainBtn.addEventListener('click', () => {
+                this.restart();
+                playAgainBtn.remove();
+                declaration.remove();
+            });
+        },
         renderMove: function (button){
             if (button === undefined){
                 for (let button of this.mybutton) button.setAttribute('style', 'background-color: white');
@@ -60,7 +78,6 @@
                     button.setAttribute('style', 'background-color: black');
                 }
             }
-
         },
         appendMove: function(move){
             if (this.player1_turn) {
@@ -74,32 +91,22 @@
             this.gameFlow();
         },
         gameFlow: function(){
-            this.gameEnd = this.checkGameEnd();
+            let result = this.checkGameEnd();
             if (this.gameEnd) {
                 for (let button of this.mybutton) {
                     button.disabled = true;
                 }
-                const playAgaindiv = document.querySelector('.playAgain');
-                const playAgainBtn = document.createElement('button');
-                playAgaindiv.appendChild(playAgainBtn);
-                playAgainBtn.textContent = 'Play again';
-                playAgainBtn.addEventListener('click', () => {
-                    this.restart();
-                    playAgainBtn.remove();
-                });
+                this.endGameDOMCreate(result);
             }
         },
         checkGameEnd: function(){
             if (this.checkRows() || this.checkColumns() || this.checkDiagonals()){
-                if(this.player1_turn) {
-                    console.log(this.player2.name + ' won!');
-                }else{
-                    console.log(this.player1.name + ' won!');
-                }
-                return true;
+                this.gameEnd = true;
+                return 'won';
             } else if (!this.gameBoard.includes(0)){
                 console.log('Draw!!');
-                return true;
+                this.gameEnd = true;
+                return 'draw';
             }
         },
         checkRows: function(){
