@@ -23,10 +23,10 @@
             }
         },
         init: function(){
-            this.cacheDom();
+            this.buttonEvent();
             this.promptMove();
         },
-        cacheDom: function(){
+        buttonEvent: function(){
             const mybutton = document.querySelectorAll('button');
             for (let button of mybutton) {
                 button.addEventListener('click', () => {
