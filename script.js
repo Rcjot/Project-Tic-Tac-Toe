@@ -22,8 +22,21 @@
                 console.log(rowString);
             }
         },
-        promptMove: function(){
-            let move = prompt('your move');
+        init: function(){
+            this.cacheDom();
+            this.promptMove();
+        },
+        cacheDom: function(){
+            const mybutton = document.querySelectorAll('button');
+            for (let button of mybutton) {
+                button.addEventListener('click', () => {
+                    console.log(button.textContent);
+                    this.promptMove(button.textContent);
+                    button.disabled = true;
+                })
+            }
+        },
+        promptMove: function(move){
             if (this.player1_turn) {
                 this.gameBoard[move] = this.player1.move;
                 this.player1_turn = false;
@@ -33,7 +46,6 @@
             }
             this.printGame();
             if (move <0 || move>8 || this.checkGameEnd()) return 1;
-            if (this.gameBoard.includes(0)) this.promptMove();
         },
         checkGameEnd: function(){
             if (this.checkRows() || this.checkColumns() || this.checkDiagonals()){
@@ -69,12 +81,9 @@
             if(this.gameBoard[2] != 0 
                 && this.gameBoard[2] == this.gameBoard[4]
                 && this.gameBoard[4] == this.gameBoard[6]) return true;
-        }
-    
-
+        }  
     }
-    gameBoard.printGame();
-    gameBoard.promptMove();
+    gameBoard.init();
 //})();
 
 
