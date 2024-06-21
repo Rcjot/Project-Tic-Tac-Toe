@@ -71,7 +71,20 @@
     </header>
 
     <main>
-        <button class="restart">restart</button>
+        <div class="scoreBoard">
+            <div class="player1Board">
+                <div class="player1Image"></div>
+                <div class="player1Name"></div>
+                <div class="player1Score"></div>
+            </div>
+            <div class="versus">Versus</div>
+            <div class="player2Board">
+                <div class="player2Image"></div>
+                <div class="player2Name"></div>
+                <div class="player2Score"></div>
+            </div>
+        </div>
+        
         <div id="container">
             <button class="square" id="0"><div class="circle"></div></button>
             <button class="square" id="1"><div class="circle"></div></button>
@@ -83,7 +96,9 @@
             <button class="square" id="7"><div class="circle"></div></button>
             <button class="square" id="8"><div class="circle"></div></button>
         </div>
-        <div class="playAgain"></div>
+        <div class="playAgain">
+            <button class="restart">restart</button>
+        </div>
     </main>
 
 

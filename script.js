@@ -1,6 +1,9 @@
 (function(){
     Player = function (name,move) {
-        return {name,move};
+        let Score = 0;
+        const getScore = () => Score;
+        const addScore = () => Score++;
+        return {name,move, addScore, getScore};
     };
     const gameBoard = {
         player1_turn: true,
@@ -16,6 +19,8 @@
 
         init: function(){
             this.buttonEvent();
+            this.customizePlayerDlg();
+            this.appendtoScoreBoard();
         },
         buttonEvent: function(){
             for (let button of this.mybutton) {
@@ -27,7 +32,6 @@
             }
             const restartBtn = document.querySelector('.restart');
             restartBtn.addEventListener('click', () => this.restart());
-            this.customizePlayer();
         },
         restart: function(){
             this.player1_turn = true;
@@ -43,7 +47,15 @@
                 this.playAgainBtn.remove();
                 this.declaration.remove();
             }catch{console.log('no play again btn')};
-            
+        },
+        gameFlow: function(){
+            let result = this.checkGameEnd();
+            if (this.gameEnd) {
+                for (let button of this.mybutton) {
+                    button.disabled = true;
+                }
+                this.endGameDOMCreate(result);
+            }
         },
         endGameDOMCreate: function(result) {
             const playAgaindiv = document.querySelector('.playAgain');
@@ -55,28 +67,27 @@
             this.playAgainBtn.addEventListener('click', () => this.restart());
             if (result === 'won') {
                 this.declaration.textContent =(this.player1_turn) ? this.player2.name + ' won!': this.player1.name + ' won!';
+                (this.player1_turn) ? this.player2.addScore() : this.player1.addScore();
             }else if (result === 'draw'){
                 this.declaration.textContent = "it's a draw!";
-            }          
+            }   
+            this.appendtoScoreBoard();       
         },
         renderMove: function (button){
-            
             if (button === undefined){ // restart called block
                 for (let button of this.mybutton){
                     const insideButton = button.querySelector('div');
                     insideButton.textContent = '';
                     insideButton.style.backgroundImage = 'none';
                     insideButton.style.backgroundColor = 'transparent';
-
                 } 
             }else {
                 const insideButton = button.querySelector('div');
-                
                 if (this.player1_turn) {
-                    (this.player1.move.length === 1) ? (insideButton.textContent = this.player1.move) : (insideButton.style.backgroundImage = this.player1.move);                  
+                    (this.player1.move.length === 1) ? (insideButton.textContent = this.player1.move) : (insideButton.style.backgroundImage = `url(images/${this.player1.move}.webp`);                  
                     insideButton.style.backgroundColor = 'rgba(82, 127, 187, 0.4)';
                 }else{
-                    (this.player2.move.length === 1) ? (insideButton.textContent = this.player2.move) : (insideButton.style.backgroundImage = this.player2.move); 
+                    (this.player2.move.length === 1) ? (insideButton.textContent = this.player2.move) : (insideButton.style.backgroundImage = `url(images/${this.player2.move}.webp)`); 
                     insideButton.style.backgroundColor = 'rgba(154, 205, 50, 0.4)';
                 }
             }
@@ -90,15 +101,6 @@
                 this.player1_turn = true;
             }
             this.gameFlow();
-        },
-        gameFlow: function(){
-            let result = this.checkGameEnd();
-            if (this.gameEnd) {
-                for (let button of this.mybutton) {
-                    button.disabled = true;
-                }
-                this.endGameDOMCreate(result);
-            }
         },
         checkGameEnd: function(){
             if (this.checkRows() || this.checkColumns() || this.checkDiagonals()){
@@ -132,7 +134,7 @@
                 && this.gameBoard[2] == this.gameBoard[4]
                 && this.gameBoard[4] == this.gameBoard[6]) return true;
         },  
-        customizePlayer: function(){ //this could be better!
+        customizePlayerDlg: function(){ 
             const customizeBtn = document.querySelector('.customize');
             customizeBtn.addEventListener('click', () => {
                 dialog = document.querySelector('dialog');
@@ -141,26 +143,46 @@
                 closeBtn.addEventListener('click', () => dialog.close());
                 const confirmBtn = document.querySelector('#confirmBtn');
                 confirmBtn.addEventListener('click', () => {
-                    const name1 = document.querySelector('#name1');
-                    const name2 = document.querySelector('#name2');
-                    try {
-                        const selected = document.querySelector ('input[name="choice"]:checked');
-                        this.player1 = Player(name1.value,`url(images/${selected.value}.webp`);
-                    }catch (error) {
-                        console.log('error');
-                        this.player1 = Player(name1.value,'O');                       
-                    }
-                    try {
-                        const selected2 = document.querySelector('input[name="choice2"]:checked');
-                        this.player2 = Player(name2.value, `url(images/${selected2.value}.webp)`);
-                    } catch (error) {
-                        this.player2 = Player(name2.value, 'X');
-                    }
-                    dialog.close();
-                    this.restart();
+                   this.setCustomizeChanges();
+                   this.appendtoScoreBoard();
                 })
             });
+        },
+        setCustomizeChanges: function(){
+            const name1 = document.querySelector('#name1');
+            const name2 = document.querySelector('#name2');
+            try {
+                const selected = document.querySelector ('input[name="choice"]:checked');
+                this.player1 = Player(name1.value,selected.value);
+            }catch (error) {
+                console.log('error');
+                this.player1 = Player(name1.value,'O');                   
+            }
+            try {
+                const selected2 = document.querySelector('input[name="choice2"]:checked');
+                this.player2 = Player(name2.value, selected2.value);
+            } catch (error) {
+                this.player2 = Player(name2.value, 'X');
+            }
+            dialog.close();
+            this.restart();
+        },
+        appendtoScoreBoard: function(){
+            const player1Image = document.querySelector('.player1Image');
+            const player1Name = document.querySelector('.player1Name');
+            const player1Score = document.querySelector('.player1Score');
+            const player2Image = document.querySelector('.player2Image');
+            const player2Name = document.querySelector('.player2Name');
+            const player2Score = document.querySelector('.player2Score');
+            player1Image.style.backgroundImage = `url(images/${this.player1.move}.png)`
+            player2Image.style.backgroundImage = `url(images/${this.player2.move}.png)`
+            player1Name.textContent = this.player1.name;
+            player2Name.textContent = this.player2.name;
+            player1Score.textContent = this.player1.getScore();
+            player2Score.textContent = this.player2.getScore();
+
         }
+
     }    
     gameBoard.init();
 

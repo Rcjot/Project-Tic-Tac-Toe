@@ -120,6 +120,51 @@ dialog {
 }
 
 /* end of dlg styling */
+main {
+    display: flex;
+    flex-direction: column;
+}
+main > * {
+    flex:1;
+}
+/* scoreboard start styling */
+.scoreBoard {
+    border: 1px solid red;
+    display: flex;
+}
+.scoreBoard > * {
+    flex: 1;
+    border: 1px solid blue;
+}
+.player1Board, .player2Board {
+    display: flex;
+    flex-direction: column;
+}
+.player1Board > *, .player2Board > * {
+
+    border: 1px solid salmon;
+}
+
+.player1Image {
+    height: 50%;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.player2Image {
+    height: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.versus {
+    margin: auto;
+    text-align: center;
+    max-width: fit-content;
+}
+/* scoreboard end styling */
 #container {
     width: 50%;
     display: grid;
@@ -139,16 +184,7 @@ button {
 
     
 }
-/* .circle {
-    height: 70px;
-    width: 70px;
-    margin: auto;
-    background-image: url(images/aya.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: aliceblue;
-    border-radius: 20px;
-} */
+
  .circle{
     height: 75px;
     width: 75px;
@@ -162,6 +198,12 @@ button {
     background-repeat: no-repeat;
     background-position: 5px 3px;
  }
+
+.playAgain {
+    display: flex;
+    align-items: flex-start;
+}
+
 
 footer {
     display: flex;
