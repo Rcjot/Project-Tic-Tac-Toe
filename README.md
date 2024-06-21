@@ -22,3 +22,6 @@ goal for this project:
 
 
     help me
+
+readme started: june 19
+proj started: june 20
