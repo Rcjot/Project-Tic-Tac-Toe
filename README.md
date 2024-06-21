@@ -35,4 +35,4 @@ styling is a bit ugly, but we managed to use different font style yay?
 
 im quite satisfied with my code, looks cleaner, and understandable to me,
 
-although i would have wanted to implement modules, since there are many features that i implemented.
+although i would have wanted to implement modules, since there are many features i implemented.
