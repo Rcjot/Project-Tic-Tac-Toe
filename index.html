@@ -7,67 +7,69 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <dialog>
+        <button id="dlgCloseBtn">close</button>
+        <div class="dlgContainer">
+            <div class="dlgHeader">
+                <h1>Customize ! !</h1>
+            </div>
+            
+            <form action="#" class="myForm">
+                <div class="nameInput">
+                    <input type="text" id="name1" value="Player 1">
+                    <label for="name">player 1 Name</label>
+                </div>
+                <div class="pinsChoices">
+                    <input type="radio" name="choice" class="radio_item" id="kasumi" value="kasumi" required>
+                    <label class="label_item" for="kasumi"><img src="images/kasumi.webp" alt="kasumi"></label>
+                    <input type="radio" name="choice" class="radio_item" id="ran" value="ran">
+                    <label class="label_item" for="ran"><img src="images/ran.webp" alt="ran"></label>
+                    <input type="radio" name="choice" class="radio_item" id="aya" value="aya">
+                    <label class="label_item" for="aya"><img src="images/aya.webp" alt="aya"></label>
+                    <input type="radio" name="choice" class="radio_item" id="yukina" value="yukina">
+                    <label class="label_item" for="yukina"><img src="images/yukina.webp" alt="yukina"></label>
+                    <input type="radio" name="choice" class="radio_item" id="kokoro" value="kokoro">
+                    <label class="label_item" for="kokoro"><img src="images/kokoro.webp" alt="kokoro"></label>
+                    <input type="radio" name="choice" class="radio_item" id="layer" value="layer">
+                    <label class="label_item" for="layer"><img src="images/layer.webp" alt="layer"></label>
+                    <input type="radio" name="choice" class="radio_item" id="mashiro" value="mashiro">
+                    <label class="label_item" for="mashiro"><img src="images/mashiro.webp" alt="mashiro"></label>
+                    <input type="radio" name="choice" class="radio_item" id="tomori" value="tomori">
+                    <label class="label_item" for="tomori"><img src="images/tomori.webp" alt="tomori"></label>
+                </div>
+            </form>
+            <form action="#" class="myForm right">
+                <div class="nameInput">
+                    <input type="text" id="name2" value="Player 2">
+                    <label for="name">player 2 Name</label>
+                </div>
+                <div class="pinsChoices">
+                    <input type="radio" name="choice2" class="radio_item" id="kasumi2" value="kasumi" required>
+                    <label class="label_item" for="kasumi2"><img src="images/kasumi.webp" alt="kasumi"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="ran2" value="ran">
+                    <label class="label_item" for="ran2"><img src="images/ran.webp" alt="ran"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="aya2" value="aya">
+                    <label class="label_item" for="aya2"><img src="images/aya.webp" alt="aya"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="yukina2" value="yukina">
+                    <label class="label_item" for="yukina2"><img src="images/yukina.webp" alt="yukina"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="kokoro2" value="kokoro">
+                    <label class="label_item" for="kokoro2"><img src="images/kokoro.webp" alt="kokoro"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="layer2" value="layer">
+                    <label class="label_item" for="layer2"><img src="images/layer.webp" alt="layer"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="mashiro2" value="mashiro">
+                    <label class="label_item" for="mashiro2"><img src="images/mashiro.webp" alt="mashiro"></label>
+                    <input type="radio" name="choice2" class="radio_item" id="tomori2" value="tomori">
+                    <label class="label_item" for="tomori2"><img src="images/tomori.webp" alt="tomori"></label>
+                </div>
+            </form>
+            <button id="confirmBtn">Confirm</button>
+        </div>
+    </dialog>
+
     <header>
         TicTacToe
         <button class="customize">customize</button>
-        <dialog>
-            <button id="dlgCloseBtn">close</button>
-            <div class="dlgContainer">
-                <div class="dlgHeader">
-                    <h1>Customize ! !</h1>
-                </div>
-                
-                <form action="#" class="myForm">
-                    <div class="nameInput">
-                        <input type="text" id="name1" value="Player 1">
-                        <label for="name">player 1 Name</label>
-                    </div>
-                    <div class="pinsChoices">
-                        <input type="radio" name="choice" class="radio_item" id="kasumi" value="kasumi" required>
-                        <label class="label_item" for="kasumi"><img src="images/kasumi.webp" alt="kasumi"></label>
-                        <input type="radio" name="choice" class="radio_item" id="ran" value="ran">
-                        <label class="label_item" for="ran"><img src="images/ran.webp" alt="ran"></label>
-                        <input type="radio" name="choice" class="radio_item" id="aya" value="aya">
-                        <label class="label_item" for="aya"><img src="images/aya.webp" alt="aya"></label>
-                        <input type="radio" name="choice" class="radio_item" id="yukina" value="yukina">
-                        <label class="label_item" for="yukina"><img src="images/yukina.webp" alt="yukina"></label>
-                        <input type="radio" name="choice" class="radio_item" id="kokoro" value="kokoro">
-                        <label class="label_item" for="kokoro"><img src="images/kokoro.webp" alt="kokoro"></label>
-                        <input type="radio" name="choice" class="radio_item" id="layer" value="layer">
-                        <label class="label_item" for="layer"><img src="images/layer.webp" alt="layer"></label>
-                        <input type="radio" name="choice" class="radio_item" id="mashiro" value="mashiro">
-                        <label class="label_item" for="mashiro"><img src="images/mashiro.webp" alt="mashiro"></label>
-                        <input type="radio" name="choice" class="radio_item" id="tomori" value="tomori">
-                        <label class="label_item" for="tomori"><img src="images/tomori.webp" alt="tomori"></label>
-                    </div>
-                </form>
-                <form action="#" class="myForm right">
-                    <div class="nameInput">
-                        <input type="text" id="name2" value="Player 2">
-                        <label for="name">player 2 Name</label>
-                    </div>
-                    <div class="pinsChoices">
-                        <input type="radio" name="choice2" class="radio_item" id="kasumi2" value="kasumi" required>
-                        <label class="label_item" for="kasumi2"><img src="images/kasumi.webp" alt="kasumi"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="ran2" value="ran">
-                        <label class="label_item" for="ran2"><img src="images/ran.webp" alt="ran"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="aya2" value="aya">
-                        <label class="label_item" for="aya2"><img src="images/aya.webp" alt="aya"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="yukina2" value="yukina">
-                        <label class="label_item" for="yukina2"><img src="images/yukina.webp" alt="yukina"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="kokoro2" value="kokoro">
-                        <label class="label_item" for="kokoro2"><img src="images/kokoro.webp" alt="kokoro"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="layer2" value="layer">
-                        <label class="label_item" for="layer2"><img src="images/layer.webp" alt="layer"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="mashiro2" value="mashiro">
-                        <label class="label_item" for="mashiro2"><img src="images/mashiro.webp" alt="mashiro"></label>
-                        <input type="radio" name="choice2" class="radio_item" id="tomori2" value="tomori">
-                        <label class="label_item" for="tomori2"><img src="images/tomori.webp" alt="tomori"></label>
-                    </div>
-                </form>
-                <button id="confirmBtn">Confirm</button>
-            </div>
-        </dialog>
+        <button class="restart">restart</button>
     </header>
 
     <main>
@@ -96,9 +98,7 @@
             <button class="square" id="7"><div class="circle"></div></button>
             <button class="square" id="8"><div class="circle"></div></button>
         </div>
-        <div class="playAgain">
-            <button class="restart">restart</button>
-        </div>
+        <div class="playAgain"></div>
     </main>
 
 
