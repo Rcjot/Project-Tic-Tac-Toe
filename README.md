@@ -2,6 +2,9 @@
 
 pins came from here! : https://bandori.fandom.com/wiki/BanG_Dream!_Girls_Band_Party!/Profile_Pins
 
+images came from here! : https://bandori.party/gallery/
+
+live preview: https://rcjot.github.io/Project-Tic-Tac-Toe/
 
 hi! this is project tictactoe,
 
