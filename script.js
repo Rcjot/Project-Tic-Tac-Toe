@@ -3,7 +3,10 @@
         let Score = 0;
         const getScore = () => Score;
         const addScore = () => Score++;
-        return {name,move, addScore, getScore};
+        const resetScore = () => {
+            Score = 0;
+        };
+        return {name,move, addScore, getScore, resetScore};
     };
     const gameBoard = {
         player1_turn: true,
@@ -31,7 +34,13 @@
                 })
             }
             const restartBtn = document.querySelector('.restart');
-            restartBtn.addEventListener('click', () => this.restart());
+            restartBtn.addEventListener('click', () => {
+                this.player1 = Player(this.player1.name, 'O');
+                this.player2 = Player(this.player2.name, 'X');
+                this.restart();
+                this.appendtoScoreBoard();
+                this.uncheckRadioBtns();
+            });
         },
         restart: function(){
             this.player1_turn = true;
@@ -59,7 +68,7 @@
         },
         endGameDOMCreate: function(result) {
             const playAgaindiv = document.querySelector('.playAgain');
-            this.declaration = document.createElement('div');
+            this.declaration = document.createElement('h1');
             this.playAgainBtn = document.createElement('button');
             playAgaindiv.appendChild(this.declaration);
             playAgaindiv.appendChild(this.playAgainBtn);
@@ -166,6 +175,13 @@
             }
             dialog.close();
             this.restart();
+        },
+        uncheckRadioBtns: function(){
+            const radioBtns = document.querySelectorAll('input[type="radio"]');
+            // console.log(radioBtns);
+             for (let i=0; i< radioBtns.length; i++){
+                radioBtns[i].checked = false;
+            }
         },
         appendtoScoreBoard: function(){
             const player1Image = document.querySelector('.player1Image');

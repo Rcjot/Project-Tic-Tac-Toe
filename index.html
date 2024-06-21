@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TicTacToe</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+    </style>
 </head>
 <body>
     <dialog>
-        <button id="dlgCloseBtn">close</button>
+
+        
         <div class="dlgContainer">
             <div class="dlgHeader">
+                <button id="dlgCloseBtn">close</button>
                 <h1>Customize ! !</h1>
             </div>
-            
             <form action="#" class="myForm">
                 <div class="nameInput">
                     <input type="text" id="name1" value="Player 1">
@@ -67,7 +71,7 @@
     </dialog>
 
     <header>
-        TicTacToe
+        <h1>TicTacToe</h1>
         <button class="customize">customize</button>
         <button class="restart">restart</button>
     </header>
@@ -75,29 +79,31 @@
     <main>
         <div class="scoreBoard">
             <div class="player1Board">
-                <div class="player1Image"></div>
                 <div class="player1Name"></div>
                 <div class="player1Score"></div>
             </div>
-            <div class="versus">Versus</div>
+            <div class="versus"><h1>VS.</h1></div>
             <div class="player2Board">
-                <div class="player2Image"></div>
                 <div class="player2Name"></div>
                 <div class="player2Score"></div>
             </div>
         </div>
-        
-        <div id="container">
-            <button class="square" id="0"><div class="circle"></div></button>
-            <button class="square" id="1"><div class="circle"></div></button>
-            <button class="square" id="2"><div class="circle"></div></button>
-            <button class="square" id="3"><div class="circle"></div></button>
-            <button class="square" id="4"><div class="circle"></div></button>
-            <button class="square" id="5"><div class="circle"></div></button>
-            <button class="square" id="6"><div class="circle"></div></button>
-            <button class="square" id="7"><div class="circle"></div></button>
-            <button class="square" id="8"><div class="circle"></div></button>
+        <div id="containerBoard">
+            <div class="player1Image"></div>
+            <div id="container">
+                <button class="square" id="0"><div class="circle"></div></button>
+                <button class="square" id="1"><div class="circle"></div></button>
+                <button class="square" id="2"><div class="circle"></div></button>
+                <button class="square" id="3"><div class="circle"></div></button>
+                <button class="square" id="4"><div class="circle"></div></button>
+                <button class="square" id="5"><div class="circle"></div></button>
+                <button class="square" id="6"><div class="circle"></div></button>
+                <button class="square" id="7"><div class="circle"></div></button>
+                <button class="square" id="8"><div class="circle"></div></button>
+            </div>
+            <div class="player2Image"></div>
         </div>
+        
         <div class="playAgain"></div>
     </main>
 
