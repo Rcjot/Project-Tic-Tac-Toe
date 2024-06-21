@@ -147,10 +147,15 @@ main > * {
 
 .player1Image {
     height: 50%;
-
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
 
 .player2Image {

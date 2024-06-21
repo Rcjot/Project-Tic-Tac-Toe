@@ -94,10 +94,10 @@
         },
         appendMove: function(move){
             if (this.player1_turn) {
-                this.gameBoard[move] = this.player1.move;
+                this.gameBoard[move] = this.player1.move + '1';
                 this.player1_turn = false;
             }else{
-                this.gameBoard[move] = this.player2.move;
+                this.gameBoard[move] = this.player2.move + '2';
                 this.player1_turn = true;
             }
             this.gameFlow();
@@ -180,9 +180,7 @@
             player2Name.textContent = this.player2.name;
             player1Score.textContent = this.player1.getScore();
             player2Score.textContent = this.player2.getScore();
-
         }
-
     }    
     gameBoard.init();
 
